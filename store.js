@@ -1,6 +1,3 @@
-
-let resourceList = ['Post', 'Comment', 'Author']
-
 class Store {
   constructor(resources) {
     this.resourceNames = [];
@@ -27,7 +24,9 @@ class Store {
   }
 
   update(resource, obj) {
-    let item = this.get(resource, obj);
+    this[resource].find( (item)=> {
+      return item.rid === obj.rid
+    })
     Object.keys(obj).map( (attribute)=> {
       item[attribute] = obj[attribute]
     })
