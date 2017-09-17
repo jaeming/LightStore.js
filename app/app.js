@@ -17,6 +17,13 @@ class Store {
     })
   }
 
+  get_by(resource, options) {
+    let key = Object.keys(options)[0];
+    return this[resource].find( (item)=> {
+      return item[key] === options[key]
+    })
+  }
+
   add(resource, obj) {
     obj.rid = Math.random().toString(36).substr(2, 16);
     this[resource].push(obj)
@@ -24,8 +31,8 @@ class Store {
   }
 
   update(resource, obj) {
-    this[resource].find( (item)=> {
-      return item.rid === obj.rid
+    let item = this[resource].find( (i)=> {
+      return i.rid === obj.rid
     })
     Object.keys(obj).map( (attribute)=> {
       item[attribute] = obj[attribute]
@@ -38,6 +45,11 @@ class Store {
     let indexList = list.map( (item)=> {return item.rid});
     let index = indexList.indexOf(obj.rid);
     list.splice(index, 1)
+  }
+
+  create(resource) {
+    this[resource] = [];
+    this.resourceNames.push(resource)
   }
 
   resources() {
