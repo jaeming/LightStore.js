@@ -53,10 +53,10 @@ class Store {
   }
 
   resources() {
+    let resourceObj = {};
     this.resourceNames.map( (name)=> {
-      resourceObj = {}
       resourceObj[name] = this[name]
-      return resourceObj
     })
+    return resourceObj
   }
 }
